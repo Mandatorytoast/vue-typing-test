@@ -54,7 +54,6 @@ export default {
 </script>
 
 <style>
-@import url('https://fonts.googleapis.com/css?family=Inconsolata|Roboto+Mono&display=swap');
 #app {
     font-family: Avenir, Helvetica, Arial, sans-serif;
     -webkit-font-smoothing: antialiased;
@@ -76,12 +75,12 @@ export default {
 }
 
 body {
-    background: repeating-linear-gradient(45deg, #121212 0 50px, #1c1c1c 50px 100px);
+    background-color: #23272d;
     height: 100vh;
 }
 h1 {
-    font-family: 'Roboto', sans-serif;
-    color: #d7005f;
+    font-family: sans-serif;
+    color: #65ccb8;
     font-size: 3em;
 }
 button {

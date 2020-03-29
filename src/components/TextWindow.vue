@@ -38,8 +38,6 @@ export default {
         return {
             isMistake: false,
             errors: 0,
-            position: 0,
-            currentWordIndex: 0,
             typedWords: [],
             toTypeArr: [],
         }
@@ -56,8 +54,6 @@ export default {
         Event.$on("init", () => {
             this.isMistake = false;
             this.errors = false;
-            this.position = 0;
-            this.currentWordIndex = 0;
             this.typedWords = [];
             this.toTypeArr = []
         });
@@ -65,17 +61,7 @@ export default {
             //data[0] == The complete input of the user 
             //data[1] == the key pressed by the user
             this.splitTyped(data[0])
-            if ( data[1] !== "Backspace" ) {
-                if (data[1] === " ") {
-                    if (this.text.charAt(this.position) === " "){ 
-                        this.currentWordIndex += 1; 
-                    }
-                }
-                this.position += 1;
-                if (data[0].length === this.text.length) {
-                    return;
-                }
-                else if ( data[0] === this.text.substring(0, data[0].length)){
+                if ( data[0] === this.text.substring(0, data[0].length)){
                     this.isMistake = false;
                     this.emitCorrect();
                 } else {
@@ -84,13 +70,6 @@ export default {
                     }
                     this.isMistake = true;
                 }
-            } else {
-                if (this.position > 0)
-                    this.position -= 1;
-                if (this.text.charAt(this.position) === " ") {
-                    this.currentWordIndex -= 1;
-                }
-            }
         });
     },  
     computed: {
@@ -109,23 +88,23 @@ export default {
 
 <style scoped>
 .text-window {
-    border-width: 5px;
+    border-width: 6px;
     border-style: solid;
-    border-color: #212121;
+    border-color: #E2E2E2;
     border-radius: 20px;
     padding: 30px;
-    color: #AAAAAA;
-    background-color: #121212;
+    color: #121212;
+    background-color: #E2E2E2;
     font-size: 1.1em;
 }
 .error {
     border-color:  #d7005f;
 }
 .typed {
-    color: #424242;
+    color: #959595;
 }
 .current {
     color: #121212;
-    background-color: #EEEEEE;
+    background-color: #65ccb8;
 }
 </style>
