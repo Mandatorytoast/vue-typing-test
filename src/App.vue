@@ -1,6 +1,6 @@
 <template>
     <div id="app" class="container">
-        <h1>Typing Speed Test</h1>
+        <h1>Typing Test</h1>
         <TextWindow :text="phrases[phraseIndex]" :textArr="phrases[phraseIndex].split(' ')">
         </TextWindow>
         <div id="userIn">
