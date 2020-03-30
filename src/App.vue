@@ -1,13 +1,17 @@
 <template>
-    <div id="app" class="container">
-        <h1>Typing Test</h1>
-        <TextWindow :text="phrases[phraseIndex]" :textArr="phrases[phraseIndex].split(' ')">
-        </TextWindow>
-        <div id="userIn">
-            <TextInput :text="phrases[phraseIndex]"></TextInput>
-            <button @click="init">Reset</button>
+    <div>
+        <div id="app" class="container">
+            <h1>Typing Test</h1>
+            <TextWindow :text="phrases[phraseIndex]" :textArr="phrases[phraseIndex].split(' ')">
+            </TextWindow>
+            <div id="userIn">
+                <TextInput :text="phrases[phraseIndex]"></TextInput>
+                <button @click="init">Reset</button>
+            </div>
+            <score :textLength="phrases[phraseIndex].length"></score>
+            <div class="push"></div>
         </div>
-        <score :textLength="phrases[phraseIndex].length"></score>
+        <Footer></Footer>
     </div>
 </template>
 
@@ -15,6 +19,7 @@
 import TextWindow from "./components/TextWindow.vue"
 import TextInput from "./components/TextInput.vue"
 import Score from "./components/Score.vue"
+import Footer from "./components/Footer.vue"
 
 export default {
     name: 'App',
@@ -22,6 +27,7 @@ export default {
         TextWindow,
         TextInput,
         Score,
+        Footer,
     },
     data() {
         return {
@@ -38,13 +44,15 @@ export default {
                 "It as announcing it me stimulated frequently continuing. Least their she you now above going stand forth. He pretty future afraid should genius spirit on. Set property addition building put likewise get. Of will at sell well at as. Too want but tall nay like old. Removing yourself be in answered he. Consider occasion get improved him she eat. Letter by lively oh denote an.",
                 "So by colonel hearted ferrars. Draw from upon here gone add one. He in sportsman household otherwise it perceived instantly. Is inquiry no he several excited am. Called though excuse length ye needed it he having. Whatever throwing we on resolved entrance together graceful. Mrs assured add private married removed believe did she. Is allowance instantly strangers applauded discourse so. Separate entrance welcomed sensible laughing why one moderate shy. We seeing piqued garden he. As in merry at forth least ye stood. And cold sons yet with. Delivered middleton therefore me at. Attachment companions man way excellence how her pianoforte.",
             ],
-            phraseIndex: 0,
+            phraseIndex: 0, // number of the phrase that will be randomly selected
         }
     }, 
     methods: {
+        // Init sets base sets a random value for phraseIndex and emits an init event which 
+        // is used to initialize all components that need it
         init() {
-           this.phraseIndex = Math.floor(Math.random() * this.phrases.length );
-           Event.$emit("init");
+            this.phraseIndex = Math.floor(Math.random() * this.phrases.length ); 
+            Event.$emit("init");
         }
     },
     created() {
@@ -54,34 +62,44 @@ export default {
 </script>
 
 <style>
+html, body {
+    height:100%;
+    margin-top: 0px;
+    margin-bottom: 0px;
+}
 #app {
     font-family: Avenir, Helvetica, Arial, sans-serif;
     -webkit-font-smoothing: antialiased;
     -moz-osx-font-smoothing: grayscale;
     text-align: center;
     color: #2c3e50;
-    margin-top: 60px;
 }
 
 #userIn {
     display: inline;
 }
 
+.push {
+    height: 150px;
+}
 .container {
     width: 70%;
     margin-right: auto;
     margin-left: auto;
-    margin-top: 10px;
+    min-height: 100%;
+    margin-bottom: -150px;
 }
 
 body {
     background-color: #23272d;
-    height: 100vh;
+    display: flex;
 }
 h1 {
     font-family: sans-serif;
     color: #65ccb8;
     font-size: 3em;
+    margin-top: 0px;
+    padding-top: 50px;
 }
 button {
     height: 40px;
