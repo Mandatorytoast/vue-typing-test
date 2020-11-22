@@ -73,4 +73,7 @@ export default {
        border-radius: 10px;
        padding: 5px;
    } 
+.typing-input:focus{
+        outline: none;
+}
 </style>
